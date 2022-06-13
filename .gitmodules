@@ -1,0 +1,3 @@
+[submodule "docker/advanced/task3/angular-hero"]
+	path = docker/advanced/task3/angular-hero
+	url = https://github.com/handuy/angular-hero.git
