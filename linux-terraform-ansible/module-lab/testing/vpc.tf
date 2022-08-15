@@ -14,3 +14,18 @@ module "vpc_testing" {
     Environment = var.env
   }
 }
+
+# https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/4.9.0
+
+module "ec2_security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "4.9.0"
+
+  name        = "web-security-group-${var.env}"
+  description = "Security group for Web ec2 instances"
+  vpc_id      = module.vpc_testing.vpc_id
+
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp"]
+  egress_rules        = ["all-all"]
+}

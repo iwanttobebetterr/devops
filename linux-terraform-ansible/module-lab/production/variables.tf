@@ -9,3 +9,9 @@ variable "s3_bucket_acl" {
   description = "S3 permission"
   default = "authenticated-read"
 }
+
+variable "project" {
+  type = object({
+    name = string
+  })
+}
