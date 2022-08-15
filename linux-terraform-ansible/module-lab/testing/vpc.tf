@@ -2,7 +2,7 @@ module "vpc_testing" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.14.2"
 
-  name = "devops-07-anhph-vpc"
+  name = "devops-07-anhph-vpc-${var.env}"
   cidr = "10.0.0.0/16"
 
   azs             = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
