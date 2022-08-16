@@ -29,3 +29,22 @@ module "ec2_security_group" {
   ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp"]
   egress_rules        = ["all-all"]
 }
+
+module "security_group_rds" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "4.9.0"
+
+  name        = "${var.project.name}-rds-${var.env}"
+  description = "Security group for RDS db instances"
+  vpc_id      = module.vpc_production.vpc_id
+
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 3306
+      to_port     = 3306
+      protocol    = "tcp"
+      description = "User-service ports"
+      cidr_blocks = "10.99.0.0/18"
+    }
+  ]
+}
